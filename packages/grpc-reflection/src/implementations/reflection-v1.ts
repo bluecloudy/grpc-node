@@ -130,6 +130,10 @@ export class ReflectionV1Implementation {
         // if we didn't find anything then try just a FQN lookup
         if (!referencedFile) {
           referencedFile = this.symbols[ref];
+          // Fix: ref in a file with no package 
+          if(!referencedFile){
+             referencedFile = this.symbols[`.${ref}`];
+          }
         }
       }
 
